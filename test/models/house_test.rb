@@ -19,6 +19,6 @@ class HouseTest < ActiveSupport::TestCase
 
   test "name should not be too long" do
     @house.name = "a" * 51
-    assert_not @user.valid?
+    assert_not @house.valid?
   end
 end
