@@ -23,5 +23,8 @@ module BalmoralNew
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+    # Note from Jérôme: added this line below because of following blocking error occuring when loading fixtures for tests
+    # RuntimeError: Foreign key violations found in your fixture data. Ensure you aren't referring to labels that don't exist on associations.
+    config.active_record.verify_foreign_keys_for_fixtures = false
   end
 end

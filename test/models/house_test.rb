@@ -1,11 +1,8 @@
 require "test_helper"
 
 class HouseTest < ActiveSupport::TestCase
-  # test "the truth" do
-  #   assert true
-  # end
   def setup
-    @house = House.new(name: "Example house")
+    @house = House.new(name: "test house")
   end
 
   test "should be valid" do
@@ -20,5 +17,9 @@ class HouseTest < ActiveSupport::TestCase
   test "name should not be too long" do
     @house.name = "a" * 51
     assert_not @house.valid?
+  end
+
+  test "house_count" do
+    assert_equal 2, House.count
   end
 end
