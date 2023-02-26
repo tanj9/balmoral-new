@@ -35,7 +35,7 @@ class TribeTest < ActiveSupport::TestCase
     assert_not @tribe.valid?
   end
 
-  test "color should not be less than 50 characters" do
+  test "color should not be too long" do
     @tribe.color = "a" * 51
     assert_not @tribe.valid?
   end
