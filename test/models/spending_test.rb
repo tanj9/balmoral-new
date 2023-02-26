@@ -43,7 +43,7 @@ class SpendingTest < ActiveSupport::TestCase
   end
 
   test "date should be a valid date" do
-    @spending.date = "2023-02-01"
+    @spending.date = "2023-02-32"
     assert_not @spending.valid?
   end
 
