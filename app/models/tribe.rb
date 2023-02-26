@@ -1,6 +1,7 @@
 class Tribe < ApplicationRecord
   belongs_to :house
   has_many :spendings
+  has_many :users
 
   validates :keys, presence: true, numericality: { only_integer: true, greater_than_or_equal_to: 0, less_than: 1000 }
   validates :color, presence: true, length: { maximum: 50 }
