@@ -7,11 +7,6 @@ class UserTest < ActiveSupport::TestCase
     @user = @green_tribe.users.build(email: "corto@maltese.com", password: "123456", first_name: "corto", last_name: "maltese", role: "member")
   end
 
-  test "email should be present" do
-    @user.email = nil
-    assert @user.valid?
-  end
-
   test "first_name should be present" do
     @user.first_name = ""
     assert_not @user.valid?
@@ -34,6 +29,11 @@ class UserTest < ActiveSupport::TestCase
 
   test "role should be present" do
     @user.role = ""
+    assert_not @user.valid?
+  end
+
+  test "role should be limited to 'admin' or 'member'" do
+    @user.role = "rider"
     assert_not @user.valid?
   end
 

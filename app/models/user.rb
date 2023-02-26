@@ -5,4 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   belongs_to :tribe
+
+  validates :first_name, presence: true, length: { maximum: 30 }
+  validates :last_name, presence: true, length: { maximum: 50 }
+  validates :role, presence: true, inclusion: { in: %w[admin member], message: "%<value> is not a valid role" }
 end
