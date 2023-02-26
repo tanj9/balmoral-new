@@ -25,6 +25,11 @@ class TribeTest < ActiveSupport::TestCase
     assert_not @tribe.valid?
   end
 
+  test "keys should be less than 1,000" do
+    @tribe.keys = 1_000
+    assert_not @tribe.valid?
+  end
+
   test "color should be present" do
     @tribe.color = "     "
     assert_not @tribe.valid?
