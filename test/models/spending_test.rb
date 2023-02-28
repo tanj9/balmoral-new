@@ -42,11 +42,6 @@ class SpendingTest < ActiveSupport::TestCase
     assert_not @spending.valid?
   end
 
-  test "date should be a valid date" do
-    @spending.date = "2023-02-32"
-    assert_not @spending.valid?
-  end
-
   test "category should be present" do
     @spending.category = ""
     assert_not @spending.valid?

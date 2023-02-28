@@ -44,21 +44,6 @@ class BookingTest < ActiveSupport::TestCase
     assert_not @booking.valid?
   end
 
-  test "status should be present" do
-    @booking.status = ""
-    assert_not @booking.valid?
-  end
-
-  test "start_date should be present" do
-    @booking.start_date = nil
-    assert_not @booking.valid?
-  end
-
-  test "end_date should be present" do
-    @booking.end_date = nil
-    assert_not @booking.valid?
-  end
-
   test "key price should be an integer" do
     @booking.key_price = 0.5
     assert_not @booking.valid?
@@ -71,6 +56,21 @@ class BookingTest < ActiveSupport::TestCase
 
   test "key price should be different from 0" do
     @booking.key_price = 0
+    assert_not @booking.valid?
+  end
+
+  test "status should be present" do
+    @booking.status = ""
+    assert_not @booking.valid?
+  end
+
+  test "start_date should be present" do
+    @booking.start_date = nil
+    assert_not @booking.valid?
+  end
+
+  test "end_date should be present" do
+    @booking.end_date = nil
     assert_not @booking.valid?
   end
 end
