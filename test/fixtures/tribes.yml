@@ -1,0 +1,11 @@
+red:
+  keys: 130
+  color: red
+  shareholding: 0.5
+  house: one
+
+green:
+  keys: 150
+  color: green
+  shareholding: 0.5
+  house: one

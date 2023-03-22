@@ -52,6 +52,10 @@ gem "devise"
 gem "autoprefixer-rails"
 gem "font-awesome-sass", "~> 6.1"
 gem "simple_form", github: "heartcombo/simple_form"
+
+# Adds validations for dates to ActiveModel / Rails 7 [https://github.com/adzap/validates_timeliness/]
+gem 'validates_timeliness', '~> 7.0.0.beta1'
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
