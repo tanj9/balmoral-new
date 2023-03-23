@@ -1,0 +1,5 @@
+<h1>Bienvenue dans votre maison <%=  @house.name %></h1>
+
+<% if current_user %>
+  Bonjour <%= current_user.first_name %>
+<% end %>
