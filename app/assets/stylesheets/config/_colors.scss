@@ -1,10 +1,21 @@
 // Define variables for your color scheme
 
-// For example:
-$red: #FD1015;
-$blue: #0D6EFD;
-$yellow: #FFC65A;
-$orange: #E67E22;
-$green: #1EDD88;
-$gray: #0E0000;
-$light-gray: #F4F4F4;
+// balmoral general colors
+$balmoral-yellow: #FBC24C;
+$balmoral-blue: #358EC6;
+$balmoral-red: #FF3333;
+$balmoral-green: #50BFA5;
+$balmoral-dark-grey: #2F2E41;
+$balmoral-dark-grey-with-opacity: rgba(47, 46, 65, 0.8);
+$balmoral-light-grey: #DEDEDE;
+$balmoral-background-white: #FAFAFF;
+$balmoral-icons: $balmoral-dark-grey;
+
+// balmoral tribe colors
+$tribe-orange: #FA672A;
+$tribe-green: #2CB3AF;
+$tribe-violet: #6D62D0;
+$tribe-carmine: #9B1515;
+$tribe-asparagus: #6CA02F;
+$tribe-indigo: #164a66;
+$platform: #B4B4B4;
