@@ -12,67 +12,34 @@ RSpec.describe Tribe, type: :model do
     )
   end
 
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+  describe 'associations' do
+    it { should belong_to(:house) }
+    it { should have_many(:users) }
+    it { should have_many(:spendings) }
   end
 
-  it 'should have keys' do
-    subject.keys = nil
-    expect(subject).to_not be_valid
-  end
+  describe 'validations' do
+    it 'is valid with valid attributes' do
+      expect(subject).to be_valid
+    end
 
-  it 'keys should be an integer' do
-    subject.keys = 0.5
-    expect(subject).to_not be_valid
-  end
+    describe 'keys' do
+      it { should validate_presence_of(:keys) }
+      it { should validate_numericality_of(:keys).only_integer }
+      it { should validate_numericality_of(:keys).is_greater_than_or_equal_to(0) }
+      it { should validate_numericality_of(:keys).is_less_than(1_000) }
+    end
 
-  it 'keys should be greater or equal to zero' do
-    subject.keys = -1
-    expect(subject).to_not be_valid
-  end
+    describe 'color' do
+      it { should validate_presence_of(:color) }
+      it { should validate_length_of(:color).is_at_most(50) }
+    end
 
-  it 'keys should be less than 1,000' do
-    subject.keys = 1_000
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a color' do
-    subject.color = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'color should not be too long' do
-    subject.color = "a" * 51
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a shareholding' do
-    subject.shareholding = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'shareholding should be a number' do
-    subject.shareholding = 'string'
-    expect(subject).to_not be_valid
-  end
-
-  it 'shareholding should be greater than zero' do
-    subject.shareholding = -0.00001
-    expect(subject).to_not be_valid
-  end
-
-  it 'shareholding should be different from zero' do
-    subject.shareholding = 0
-    expect(subject).to_not be_valid
-  end
-
-  it 'shareholding should be less than or equal to 1' do
-    subject.shareholding = 1.00001
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a house' do
-    subject.house = nil
-    expect(subject).to_not be_valid
+    describe 'shareholding' do
+      it { should validate_presence_of(:shareholding) }
+      it { should validate_numericality_of(:shareholding) }
+      it { should validate_numericality_of(:shareholding).is_greater_than(0) }
+      it { should validate_numericality_of(:shareholding).is_less_than_or_equal_to(1) }
+    end
   end
 end
