@@ -96,8 +96,18 @@ RSpec.describe Booking, type: :model do
       expect(user_booking).to_not be_valid
     end
 
+    it 'start date should be a date' do
+      user_booking.start_date = "a given date"
+      expect(user_booking).to_not be_valid
+    end
+
     it 'should have an end_date' do
       user_booking.end_date = nil
+      expect(user_booking).to_not be_valid
+    end
+
+    it 'end date should be a date' do
+      user_booking.end_date = "another given date"
       expect(user_booking).to_not be_valid
     end
   end
