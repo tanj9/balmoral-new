@@ -22,47 +22,53 @@ RSpec.describe User, type: :model do
     )
   end
 
-  it 'is valid with valid attributes' do
-    expect(subject).to be_valid
+  describe 'associations' do
+    it { should belong_to(:tribe) }
+    it { should have_many(:bookings) }
+    # it { should have_many(:messages) }
   end
 
-  it 'should have an email' do
-    subject.email = nil
-    expect(subject).to_not be_valid
-  end
+  describe 'validations' do
+    it 'is valid with valid attributes' do
+      expect(subject).to be_valid
+    end
 
-  it 'should have a first name' do
-    subject.first_name = nil
-    expect(subject).to_not be_valid
-  end
+    describe 'email' do
+      it { should validate_presence_of(:email) }
+    end
 
-  it 'first name should not be too long' do
-    subject.first_name = "a" * 51
-    expect(subject).to_not be_valid
-  end
+    describe 'first_name' do
+      it { should validate_presence_of(:first_name) }
+      it { should validate_length_of(:first_name).is_at_most(30) }
+    end
 
-  it 'should have a last name' do
-    subject.last_name = nil
-    expect(subject).to_not be_valid
-  end
+    describe 'last_name' do
+      it { should validate_presence_of(:last_name) }
+      it { should validate_length_of(:last_name).is_at_most(50) }
+    end
 
-  it 'last name should not be too long' do
-    subject.last_name = "a" * 51
-    expect(subject).to_not be_valid
-  end
+    describe 'role' do
+      # following shoulda-matcher (validate_presence_of) generates an error
+      # `ArgumentError: invalid value for Integer(): ""`
+      # it { should validate_presence_of(:role) }
 
-  it 'should have a role' do
-    subject.role = nil
-    expect(subject).to_not be_valid
-  end
+      it 'should have a role' do
+        subject.role = nil
+        expect(subject).to_not be_valid
+      end
 
-  it "role should be limited to 'admin' or 'member'" do
-    subject.role = 'guitar player'
-    expect(subject).to_not be_valid
-  end
+      # following shoulda-matcher (validate_inclusion_of) generates an error
+      # `ArgumentError: invalid value for Integer(): ""`
+      # it do
+      #   should validate_inclusion_of(:role)
+      #     .in_array(%w[admin member])
+      #     .with_message(/is not a valid role/)
+      # end
 
-  it 'should belong to a tribe' do
-    subject.tribe = nil
-    expect(subject).to_not be_valid
+      it "role should be limited to 'admin' or 'member'" do
+        subject.role = 'guitar player'
+        expect(subject).to_not be_valid
+      end
+    end
   end
 end
