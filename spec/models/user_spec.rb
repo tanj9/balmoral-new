@@ -36,7 +36,7 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it 'should have a first name which is not too long' do
+  it 'first name should not be too long' do
     subject.first_name = "a" * 51
     expect(subject).to_not be_valid
   end
@@ -46,7 +46,7 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it 'should have a last name which is not too long' do
+  it 'last name should not be too long' do
     subject.last_name = "a" * 51
     expect(subject).to_not be_valid
   end
@@ -56,7 +56,7 @@ RSpec.describe User, type: :model do
     expect(subject).to_not be_valid
   end
 
-  it "should have a role limited to 'admin' or 'member'" do
+  it "role should be limited to 'admin' or 'member'" do
     subject.role = 'guitar player'
     expect(subject).to_not be_valid
   end
