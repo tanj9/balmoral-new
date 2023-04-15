@@ -21,67 +21,33 @@ RSpec.describe Spending, type: :model do
     )
   end
 
-  it 'should be valid with valid attributes' do
-    expect(subject).to be_valid
+  describe 'associations' do
+    it { should belong_to(:tribe) }
   end
 
-  it 'should have an amount' do
-    subject.amount = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'amount should be a number' do
-    subject.amount = 'word'
-    expect(subject).to_not be_valid
-  end
-
-  it 'amount should be greater than zero' do
-    subject.amount = -1
-    expect(subject).to_not be_valid
-  end
-
-  it 'amount should be different from zero' do
-    subject.amount = 0
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a date' do
-    subject.date = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'date should be of type date' do
-    subject.date = "a given date"
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a category' do
-    subject.category = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'category should not be too long' do
-    subject.category = "a" * 51
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have details' do
-    subject.details = nil
-    expect(subject).to_not be_valid
-  end
-
-  it 'details should have minimum length (more than 7 chars)' do
-    subject.details = "123456"
-    expect(subject).to_not be_valid
-  end
-
-  it 'details should not be too long (less than 400 chars)' do
-    subject.details = "a" * 401
-    expect(subject).to_not be_valid
-  end
-
-  it 'should have a tribe' do
-    subject.tribe = nil
-    expect(subject).to_not be_valid
+  describe 'validations' do
+    it 'should be valid with valid attributes' do
+      expect(subject).to be_valid
+    end
+    describe 'amount' do
+      it { should validate_presence_of(:amount) }
+      it { should validate_numericality_of(:amount).is_greater_than(0) }
+    end
+    describe 'date' do
+      it { should validate_presence_of(:date) }
+      it 'date should be of type date' do
+        subject.date = "a given date"
+        expect(subject).to_not be_valid
+      end
+    end
+    describe 'category' do
+      it { should validate_presence_of(:category) }
+      it { should validate_length_of(:category).is_at_most(50) }
+    end
+    describe 'details' do
+      it { should validate_presence_of(:details) }
+      it { should validate_length_of(:details).is_at_least(7) }
+      it { should validate_length_of(:details).is_at_most(400) }
+    end
   end
 end
