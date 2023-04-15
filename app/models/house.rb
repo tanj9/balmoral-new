@@ -3,4 +3,5 @@ class House < ApplicationRecord
   has_many :tribes, dependent: :destroy
   has_many :users, through: :tribes
   has_many :platforms, dependent: :destroy
+  has_many :bookings, dependent: :destroy
 end
