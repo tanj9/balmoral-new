@@ -50,72 +50,67 @@ RSpec.describe Booking, type: :model do
     )
   end
 
-  context 'with platform' do
-    it 'should be valid with valid attributes' do
-      expect(platform_booking).to be_valid
+  subject {
+    Booking.new(
+      start_date: Date.today,
+      end_date: Date.today + 1,
+      key_price: 1,
+      status: "pending",
+      user:,
+      house:
+    )
+  }
+
+  describe 'associations' do
+    it { should belong_to(:house) }
+    describe 'belongs to either a user or a platform' do
+      context 'if booking has no user' do
+        before { allow(subject).to receive(:user).and_return(nil) }
+        it { should validate_presence_of(:platform) }
+      end
+      context 'if booking has no platform' do
+        before { allow(subject).to receive(:platform).and_return(nil) }
+        it { should validate_presence_of(:user) }
+      end
     end
   end
 
-  context 'with user' do
-    it 'should be valid with valid attributes' do
-      expect(user_booking).to be_valid
+  describe 'validations' do
+    describe 'valid with valid attributes' do
+      it 'booking from platform should be valid with valid attributes' do
+        expect(platform_booking).to be_valid
+      end
+      it 'booking from user should be valid with valid attributes' do
+        expect(user_booking).to be_valid
+      end
     end
 
-    it 'should have a house' do
-      user_booking.house = nil
-      expect(user_booking).to_not be_valid
+    describe 'key_price' do
+      it { should validate_presence_of(:key_price) }
+      it { should validate_numericality_of(:key_price).only_integer }
+      it { should validate_numericality_of(:key_price).is_greater_than(0) }
     end
 
-    it 'should have a price in keys' do
-      user_booking.key_price = nil
-      expect(user_booking).to_not be_valid
+    describe 'status' do
+      it { should validate_presence_of(:status) }
+      # next spec to be uncommented when enum is implemented on status
+      xit { should define_enum_for(:status).with_values(%i[pending confirmed declined cancelled]) }
     end
 
-    it 'key price should be an integer' do
-      user_booking.key_price = 0.5
-      expect(user_booking).to_not be_valid
+    describe 'start_date' do
+      it { should validate_presence_of(:start_date) }
+      it 'start date should be a date' do
+        user_booking.start_date = "a given date"
+        expect(user_booking).to_not be_valid
+      end
     end
 
-    it 'key price should be an positive' do
-      user_booking.key_price = -1
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'key price should be different from zero' do
-      user_booking.key_price = 0
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'should have a status (not empty)' do
-      user_booking.status = ''
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'should have a start_date' do
-      user_booking.start_date = nil
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'start date should be a date' do
-      user_booking.start_date = "a given date"
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'should have an end_date' do
-      user_booking.end_date = nil
-      expect(user_booking).to_not be_valid
-    end
-
-    it 'end date should be a date' do
-      user_booking.end_date = "another given date"
-      expect(user_booking).to_not be_valid
-    end
-  end
-
-  context 'whoever booked (platform or user)' do
-    it 'should have either a platform or a user' do
-      user_booking.user = nil
-      expect(user_booking).to_not be_valid
+    describe 'end_date' do
+      it { should validate_presence_of(:end_date) }
+      it 'end date should be a date' do
+        user_booking.end_date = "another given date"
+        expect(user_booking).to_not be_valid
+      end
     end
   end
 end
