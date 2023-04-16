@@ -6,17 +6,38 @@ $balmoral-blue:      #358EC6;
 $balmoral-red:       #FF3333;
 $balmoral-green:     #50BFA5;
 $balmoral-orange:    #FA672A;
-$balmoral-bg-white:  #FAFAFF;
-$balmoral-light-grey:#DEDEDE;
-$balmoral-dark-grey: #2F2E41;
+$balmoral-dark-blue: #2F2E41;
+
+$balmoral-yellow-transparent:    rgba(251,194,76, 0.7);
+$balmoral-blue-transparent:      rgba(53, 142, 198, 0.7);
+$balmoral-red-transparent:       rgba(255, 51, 51, 0.7);
+$balmoral-green-transparent:     rgba(80, 191, 165, 0.7);
+$balmoral-orange-transparent:    rgba(250, 103, 42, 0.7);
+$balmoral-dark-blue-transparent: rgba(47, 46, 65, 0.7);
+
+// balmoral grey scale
+$balmoral-white:      #FFFFFF;
+$balmoral-bg-white:   #FAFAFF;
+$balmoral-light-grey: #F0F0F0;
+$balmoral-medium-grey:#DEDEDE;
+$balmoral-grey:       #808080;
+$balmoral-dark-grey:  #2F2E41;
+$balmoral-grey-with-opacity:      rgba(128, 128, 128, 0.8);
 $balmoral-dark-grey-with-opacity: rgba(47, 46, 65, 0.8);
-$balmoral-icons:     $balmoral-dark-grey;
+$balmoral-icons: $balmoral-dark-grey;
 
 // balmoral tribe colors
-$tribe-orange:   #FA672A;
 $tribe-green:    #2CB3AF;
+$tribe-orange:   #FA672A;
 $tribe-violet:   #6D62D0;
 $tribe-carmine:  #9B1515;
 $tribe-asparagus:#6CA02F;
 $tribe-indigo:   #164a66;
 $platform:       #B4B4B4;
+$tribe-green-transparent:    rgba(44, 179, 175, 0.33);
+$tribe-orange-transparent:   rgba(250, 103, 42, 0.33);
+$tribe-violet-transparent:   rgba(109, 98, 208, 0.33);
+$tribe-carmine-transparent:  rgba(155, 21, 21, 0.33);
+$tribe-asparagus-transparent:rgba(108, 160, 47, 0.33);
+$tribe-indigo-transparent:   rgba(22, 74, 102, 0.33);
+$platform-transparent:       rgba(180, 180, 180, 0.33);
